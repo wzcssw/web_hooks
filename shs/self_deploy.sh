@@ -12,8 +12,8 @@ git fetch origin master:master >> ~/web_hooks_log/web_hooks_deploy.txt
 git checkout master >> ~/web_hooks_log/web_hooks_deploy.txt
 git branch -D temp_branch >> ~/web_hooks_log/web_hooks_deploy.txt
 npm install >> ~/web_hooks_log/web_hooks_deploy.txt
-pm2 delete app.js --name web_hooks >> ~/web_hooks_log/web_hooks_deploy.txt
-pm2 start app.js --name web_hooks >> ~/web_hooks_log/web_hooks_deploy.txt
+# pm2 delete app.js --name web_hooks >> ~/web_hooks_log/web_hooks_deploy.txt
+pm2 restart app.js --name web_hooks >> ~/web_hooks_log/web_hooks_deploy.txt
 
 echo "---------------------------------------------"
 # 打印空格
