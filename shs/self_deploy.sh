@@ -3,6 +3,7 @@ mkdir -p ~/web_hooks_log
 touch ~/web_hooks_log/web_hooks_deploy.txt || exit
 echo "------------------ 部署事件 ------------------" >> ~/web_hooks_log/web_hooks_deploy.txt
 echo "部署时间:  `date '+%Y-%m-%d %H:%M:%S'`" >> ~/web_hooks_log/web_hooks_deploy.txt
+echo "部署项目:  web_hooks(本应用)" >> ~/web_hooks_log/web_hooks_deploy.txt
 
 # 输入位置
 git checkout -b temp_branch >> ~/web_hooks_log/web_hooks_deploy.txt

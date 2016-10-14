@@ -12,9 +12,9 @@ app.use(body({formidable:{uploadDir: __dirname}}));
 
 app.use(function *(next){// for Github post api
   if(this.request.method=="POST"&& this.path == '/'){
-    var project = this.query.project
+    var file_name = this.query.file_name
     if(this.request.body.ref == 'refs/heads/master'){ //master分支时
-      exec_sh(project)        // 执行脚本
+      exec_sh(file_name)        // 执行脚本
     }
     this.body = "OK"
   }else{
