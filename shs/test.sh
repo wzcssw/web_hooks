@@ -1,1 +1,1 @@
-just test
+echo 'just test'
