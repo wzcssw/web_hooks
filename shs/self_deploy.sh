@@ -15,7 +15,7 @@ npm install >> ~/web_hooks_log/web_hooks_deploy.txt
 # pm2 delete app.js --name web_hooks >> ~/web_hooks_log/web_hooks_deploy.txt
 pm2 restart app.js --name web_hooks >> ~/web_hooks_log/web_hooks_deploy.txt
 
-echo "---------------------------------------------"
+echo "---------------------------------------------" >> ~/web_hooks_log/web_hooks_deploy.txt
 # 打印空格
 emp = "\n"
 for i in {1..4}
