@@ -1,40 +1,51 @@
 "use strict"
 let app = require('koa')()
-let path = require('path')
-let static_cache = require('koa-static-cache')
-var execProcess = require("./exec_process.js");
+let execProcess = require("./exec_process.js");
 let body = require('koa-body')
+let path = require('path')
+let fs = require("fs")
 let config = require('./config')
+let view = require('./view')
 
 // 处理post参数(this.request.body)
 app.use(body({formidable:{uploadDir: __dirname}}));
-// web-hooks
-app.use(function *(next){
-  if(this.request.method=="POST" && this.path=="/web_hooks"){
-    console.log(this.request.body);
+
+app.use(function *(next){// for Github post api
+  if(this.request.method=="POST"&& this.path == '/'){
+    var project = this.query.project
     if(this.request.body.ref == 'refs/heads/master'){ //master分支时
-      execProcess.result("sh auto_deploy.sh", function(err, response){
-    		if(!err){
-    			console.log("部署完毕");
-    		}else {
-           console.log("脚本执行错误");// error
-    		}
-    	});
+      exec_sh(project)        // 执行脚本
     }
     this.body = "OK"
-    return
+  }else{
+    yield next
   }
 });
-// 默认路径
-app.use(function *(next){
-  console.log(this.request.method=="POST");
-  if(this.path=="/")
-    this.path = config.index
-  yield next;
+
+app.use(function *(next){//
+  if(this.request.method == "GET" && this.path == '/'){
+    var shs = fs.readdirSync('shs') // 脚本文件列表
+    this.body = view(shs)
+  }else if(this.request.method == "GET" && this.path == '/run'){//  执行脚本
+    var file_name = this.query.file_name
+    exec_sh(file_name)    // 执行脚本
+    this.body = "start.."
+  }else if(this.request.method == "GET" && this.path == '/detail'){// 脚本文件详情
+    this.body = fs.readFileSync('shs/'+this.query.file_name).toString()
+  }else if(this.request.method == "GET" && this.path == '/delete'){// 删除脚本文件
+    fs.unlinkSync('shs/'+this.query.file_name)
+    var shs = fs.readdirSync('shs') // 脚本文件列表
+    this.body = view(shs)
+  }else{
+    yield next
+  }
 });
-// 缓存
-app.use(static_cache(path.join(__dirname, config.root_dir), {
-  maxAge: config.max_storage_age
-}))
+
+function exec_sh(project) {
+  execProcess.result("sh shs/"+project, function(err, response){
+    console.log(!err ? response:"--  deploy faild  --");
+  });
+}
+
 // 启动
 app.listen(config.default_port)
