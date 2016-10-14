@@ -30,7 +30,7 @@ module.exports = function (data) {
     <head>
     <body style="margin:0 auto;">
       <div class="container">
-        <h1>sh files</h1>
+        <h1>Shell Files</h1>
           <table>
           `+ items(data)  +`
         </table>
