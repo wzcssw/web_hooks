@@ -7,6 +7,7 @@ echo "部署项目:  static_files" >> ~/web_hooks_log/web_hooks_deploy.txt
 
 ###
 rm -rf /home/statics_server/public  >> ~/web_hooks_log/web_hooks_deploy.txt
+mkdir /home/statics_server/public
 cd /home/static_files
 
 git checkout -b temp_branch >> ~/web_hooks_log/web_hooks_deploy.txt
