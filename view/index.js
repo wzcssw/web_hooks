@@ -31,7 +31,7 @@ module.exports = function (data) {
     <body style="margin:0 auto;">
       <div class="container">
         <h1>Shell Files</h1>
-        <a href='/log'></a>
+        <a href='/log'>log</a>
           <table>
           `+ items(data)  +`
         </table>
