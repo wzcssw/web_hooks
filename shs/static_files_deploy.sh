@@ -16,6 +16,7 @@ git checkout master >> ~/web_hooks_log/web_hooks_deploy.txt
 git branch -D temp_branch >> ~/web_hooks_log/web_hooks_deploy.txt
 
 cp /home/static_files/* /home/statics_server/public  >> ~/web_hooks_log/web_hooks_deploy.txt
+rm -rf /home/statics_server/public/.git
 cd /home/statics_server  >> ~/web_hooks_log/web_hooks_deploy.txt
 git add .  >> ~/web_hooks_log/web_hooks_deploy.txt
 git commit -m 'deploy static_files' >> ~/web_hooks_log/web_hooks_deploy.txt
