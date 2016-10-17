@@ -32,6 +32,8 @@ app.use(function *(next){//
     this.body = "start.."
   }else if(this.request.method == "GET" && this.path == '/detail'){// 脚本文件详情
     this.body = fs.readFileSync('shs/'+this.query.file_name).toString()
+  }else if(this.request.method == "GET" && this.path == '/log'){// 脚本文件详情
+    this.body = fs.readFileSync('/root/web_hooks_log/web_hooks_deploy.txt').toString()
   }else if(this.request.method == "GET" && this.path == '/delete'){// 删除脚本文件
     fs.unlinkSync('shs/'+this.query.file_name)
     var shs = fs.readdirSync('shs') // 脚本文件列表
