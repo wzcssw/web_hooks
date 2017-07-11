@@ -7,6 +7,8 @@ let fs = require("fs")
 let config = require('./config')
 let view = require('./view')
 
+//  2017-07-11
+
 // 处理post参数(this.request.body)
 app.use(body({formidable:{uploadDir: __dirname}}));
 
