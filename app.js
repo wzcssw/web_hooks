@@ -17,8 +17,10 @@ app.use(function *(next){// for Github post api
     var file_name = this.query.file_name
     if(this.request.body.ref == 'refs/heads/master'){ //master分支时
       exec_sh(file_name)        // 执行脚本
+      this.body = "OK"
+    }else{
+      this.body = "else"
     }
-    this.body = "OK"
   }else{
     yield next
   }
