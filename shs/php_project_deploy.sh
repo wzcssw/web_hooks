@@ -3,7 +3,7 @@ mkdir -p ~/php_project_log
 touch ~/php_project_log/php_project_deploy.txt || exit
 echo "------------------ 部署事件 ------------------" >> ~/php_project_log/php_project_deploy.txt
 echo "部署时间:  `date '+%Y-%m-%d %H:%M:%S'`" >> ~/php_project_log/php_project_deploy.txt
-echo "部署项目:  me" >> ~/php_project_log/php_project_deploy.txt
+echo "部署项目:  php_project" >> ~/php_project_log/php_project_deploy.txt
 
 # 输入位置
 cd /home/php_project
