@@ -19,7 +19,7 @@ app.use(function *(next){// for Github post api
       exec_sh(file_name)        // 执行脚本
       this.body = "OK"
     }else{
-      this.body = this.request.body.ref 
+      this.body = this.query.file_name
     }
   }else{
     yield next
