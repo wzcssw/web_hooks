@@ -18,8 +18,11 @@ app.use(function *(next){// for Github post api
     if(this.request.body.ref == 'refs/heads/master'){ //master分支时
       exec_sh(file_name)        // 执行脚本
       this.body = "OK"
+    }else if(this.query.file_name == "php_project_deploy.sh"){
+      exec_sh(file_name)  
+      this.body = "php_project_deploy.sh 部署"
     }else{
-      this.body = this.query.file_name
+      this.body = "看看代码吧"
     }
   }else{
     yield next
